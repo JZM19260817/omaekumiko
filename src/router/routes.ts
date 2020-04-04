@@ -17,5 +17,9 @@ export default[
         path:'/search',
         component:Search,
         exact:true,
+    },
+    {
+        path:'/channel/rid=:rid',
+        exact:true,
     }
 ]
