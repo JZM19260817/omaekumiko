@@ -20,7 +20,7 @@ class Header extends React.Component<userProps> {
     render() {
         return (
             <div className="header">
-                <Link to={'/index'}>
+                <Link to={'/'}>
                     <img
                         className="TanakaAsuka"
                         src={TanakaAsuka}

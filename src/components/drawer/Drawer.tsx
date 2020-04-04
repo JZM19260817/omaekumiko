@@ -1,35 +1,13 @@
 import React from 'react';
 import {Tabs} from 'antd';
-import * as MainAPI from '../../api/main';
+import { Switch, Route } from 'react-router-dom';
 
 interface DrawerProps {
-}
-
-interface DrawerState {
     currentIndex: number;
     drawerItem: Array<{}>,
 }
 
-class Drawer extends React.Component<DrawerProps, DrawerState> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentIndex: 0,
-            drawerItem: [],
-        }
-    }
-
-    async partition() {
-        const res = await MainAPI.fetchPartition();
-        const arr = [...res.data.partitionList[0]];
-        this.setState({
-            drawerItem: arr
-        })
-    }
-
-    async componentDidMount() {
-        await this.partition();
-    }
+class Drawer extends React.Component<DrawerProps> {
 
     getTab(data: any) {
         const {TabPane} = Tabs;
@@ -47,7 +25,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState> {
     render() {
         return (
             <div style={{textAlign: 'center'}}>
-                {this.getTab(this.state.drawerItem)}
+                {this.getTab(this.props.drawerItem)}
             </div>
         )
     }
