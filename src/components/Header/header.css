@@ -1,0 +1,20 @@
+.header{
+    height:50px;
+    background-color: #eeeeee;
+}
+.TanakaAsuka{
+    position: relative;
+    height: 40px;
+    width: 40px;
+    margin-left: 8%;
+}
+.Avatar{
+    position: relative;
+    top:-20%;
+    margin-left: 70%;
+}
+.Search{
+    position: relative;
+    top:-140%;
+    margin-left: 90%;
+}
