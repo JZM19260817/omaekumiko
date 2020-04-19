@@ -1,6 +1,5 @@
 import React from 'react';
 import {Card} from 'antd';
-import * as BangumiAPI from '../../api/bangumi';
 import * as MainAPI from '../../api/main';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router'
