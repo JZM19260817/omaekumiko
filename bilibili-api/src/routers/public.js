@@ -58,23 +58,14 @@ router.get("/public/videoPlayUrl/av:aid/cid=:cid",(req,res,next)=>{
     for(let it in cookies){
         ret+=encodeURIComponent(it)+'='+encodeURIComponent(cookies[it])+';'
     }
-    fetchVideoPlayUrl(req.params.aid,req.params.cid,ret).then(xml=>{
-        let str1=`<?xml version="1.0"?><bilibili>`;
-        let str2=`</bilibili>`;
-        let str=str1+xml+str2;
-        parseString(str,{explicitArray : false, trim: true},(err,result)=>{
-            if(!err){
-                let resData = {
-                    code: "1",
-                    msg: "success",
-                    data: []
-                };
-                resData.data.push(JSON.parse(result.bilibili.interaction));
-                res.send(resData);
-            }else{
-                next(err);
-            }
-        })
+    console.log(ret);
+    fetchVideoPlayUrl(req.params.aid,req.params.cid,ret).then(data=>{
+        const resData={
+            code:"1",
+            msg:"success",
+            data
+        };
+        res.send(resData);
     }).catch(next);
 });
 
@@ -84,18 +75,20 @@ router.get("/public/videoType/av:aid/cid=:cid",(req,res,next)=>{
     for(let it in cookies){
         ret+=encodeURIComponent(it)+'='+encodeURIComponent(cookies[it])+';'
     }
+    console.log(ret);
     fetchVideoType(req.params.aid,req.params.cid,ret).then(xml=>{
         let str1=`<?xml version="1.0"?><bilibili>`;
         let str2=`</bilibili>`;
         let str=str1+xml+str2;
         parseString(str,{explicitArray : false, trim: true},(err,result)=>{
             if(!err){
-                let resData = {
+                const resData = {
                     code: "1",
                     msg: "success",
-                    data: []
+                    data: result
                 };
-                resData.data.push(JSON.parse(result.bilibili.interaction));
+                // console.log('result:',result);
+                // resData.data.push(JSON.parse(result.bilibili.interaction));
                 res.send(resData);
             }else{
                 next(err);

@@ -19,7 +19,6 @@ class RoundSowing extends React.Component<roundSowingProps, roundSowingState> {
 
     async getRoundSowing() {
         const res = await MainAPI.fetchRoundSowing();
-        console.log('roundSowing:', res);
         this.setState({
             roundSowingIndex: res.data,
         })

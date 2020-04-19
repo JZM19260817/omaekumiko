@@ -1,5 +1,7 @@
 //用户登录
 export const SET_SHOULD_LOGIN="SET_SHOULD_LOGIN";
+//用户登出
+export const SET_LOG_OUT = "SET_LOG_OUT";
 //频道表
 export const SET_CHANNEL_BAR="SET_CHANNEL_BAR";
 // 设置直播数据

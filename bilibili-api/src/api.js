@@ -9,6 +9,7 @@ const URL_INDEX_MOBILE="https://m.bilibili.com/index.html"
 const URL_MAIN_RANKING = "https://m.bilibili.com/ranking.html";
 //排行榜 rid分区，day最近几天(3,7)
 const URL_RANKING_PARTITION ="https://api.bilibili.com/x/web-interface/ranking/region?rid={rid}&day={day}";
+const URL_RANKING="https://api.bilibili.com/x/web-interface/ranking?rid=0&day=3";
 //首页轮播
 const URL_ROUND_SOWING = "https://api.bilibili.com/x/web-show/res/loc?pf=7&id=1695";
 //热搜
@@ -110,6 +111,14 @@ export const fetchMainRankingData=()=>{
 };
 
 //查看排行榜
+export const fetchRankingIndex=()=>{
+    return axios({
+        url:URL_RANKING,
+        headers:{
+            "User-Agent":userAgent
+        }
+    }).then(res=>res.data);
+};
 export const fetchRankingPartition=(rid,day)=>{
     return axios({
         url:URL_RANKING_PARTITION.replace("{rid}",rid).replace("{day}",day),
@@ -233,7 +242,8 @@ export const fetchVideoData=(aid,p,cookie)=>{
         }
     }).then(res=>{
         const data=res.data;
-        const tmp=getInitialStateFromHTML(data,4,'__INITIAL_STATE__');
+        // const tmp=getInitialStateFromHTML(data,4,'__INITIAL_STATE__');
+        const tmp=getInitialStateFromHTML(data,2,'__INITIAL_STATE__');
         return JSON.parse(tmp.split(";")[0]);
     });
 };
@@ -247,8 +257,9 @@ export const fetchVideoPlayUrl=(aid,cid,cookie)=>{
     }).then(res=>res.data)
 };
 export const fetchVideoType=(aid,cid,cookie)=>{
+    console.log(URL_VIDEO_TYPE.replace("{av}",aid).replace("{cid}",cid));
     return axios({
-        url:URL_VIDEO_TYPE.replace("{aid}",aid).replace("{cid}",cid),
+        url:URL_VIDEO_TYPE.replace("{av}",aid).replace("{cid}",cid),
         headers:{
             "User-Agent":userAgent,
             "Referer":"https://www.bilibili.com",
@@ -300,26 +311,15 @@ export const fetchLatestBangumi=()=>{
 
 //番剧的一系列操作，包括判断大会员1，当前p2，__BILI_CONFIG__3，番剧状态4,番剧详情
 export const fetchBangumiCanWatch=(res)=>{
-    return getInitialStateFromHTML(res.data,1,"__PGC_USERSTATE__");
+    return JSON.parse(getInitialStateFromHTML(res.data,1,"__PGC_USERSTATE__"));
 };
 export const fetchCurrentP=(res)=>{
-    return getInitialStateFromHTML(res.data,2,"__playinfo__");
+    return JSON.parse(getInitialStateFromHTML(res.data,2,"__playinfo__"));
 };
-// export const fetchBiliConfig=(ep,cookie)=>{
-//     return axios({
-//         url:URL_PLAYING_BANGUMI.replace("{ep}",ep),
-//         headers:{
-//             "User-Agent":userAgent,
-//             'host':'www.bilibili.com',
-//             'cookie':cookie.replace(",","%2C")
-//         }
-//     }).then(res=>{
-//         return getInitialStateFromHTML(res.data,3,"__BILI_CONFIG__");
-//     });
-// };
+
 export const fetchThisBangumi=(res)=>{
     const initState=(getInitialStateFromHTML(res.data,4,"__INITIAL_STATE__")).split(";");
-    return initState[0];
+    return JSON.parse(initState[0]);
 };
 export const fetchBangumiDetail=(res)=>{
     return getInitialStateFromHTML(res.data,1,"__INITIAL_STATE__");
@@ -337,7 +337,7 @@ export const fetchAboutBangumi=(md,cookie)=>{
     })
 };
 export const fetchBangumiSection=(sid,cookie)=>{
-    axios({
+    return axios({
         url:URL_BANGUMI_SECTION.replace("{sid}",sid),
         headers:{
             "User-Agent":userAgent,

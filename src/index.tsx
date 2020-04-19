@@ -7,18 +7,18 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {Provider} from "react-redux";
 import store from "./redux/store";
 import 'antd/dist/antd.css';
-import Electrom from 'electron';
 // import reducer from "./redux/reducers";
 // import {createStore} from "redux";
 // const store=createStore(reducer);
+
 ReactDOM.render(
-    <React.StrictMode>
+    <>
         <Provider store={store}>
             <Router>
-                <App/>
+                <App />
             </Router>
         </Provider>
-    </React.StrictMode>,
+    </>,
     document.getElementById('root')
 );
 

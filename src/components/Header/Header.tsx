@@ -5,19 +5,15 @@ import {Avatar} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import {SearchOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
+import { defaultLogin } from '../../redux/actions/login';
+import { connect } from 'react-redux';
 
 type userProps = {
-    userName: string,
-    userAvater: string,
-    userUID:string,
-    userCookie: string,
-    isLogin: boolean,
+    session: typeof defaultLogin;
 }
 class Header extends React.Component<userProps> {
-    constructor(props) {
-        super(props);
-    }
     render() {
+        const {session} = this.props;
         return (
             <div className="header">
                 <Link to={'/'}>
@@ -27,11 +23,11 @@ class Header extends React.Component<userProps> {
                     />
                 </Link>
                 {
-                    this.props.isLogin ? (
-                        <Link className="Avatar" to={"/up-user"}>
+                    session.isLogin ? (
+                        <Link className="Avatar" to={`/up/${session.userUID}`}>
                             <Avatar
                                 size={60}
-                                icon={<img src={this.props.userAvater}/>}
+                                icon={<img src={session.userAvater}/>}
                             />
                         </Link>
                     ) : (
@@ -54,4 +50,4 @@ class Header extends React.Component<userProps> {
     }
 }
 
-export default Header;
+export default connect(({ shouldLogin }) => ({session: shouldLogin}))(Header);

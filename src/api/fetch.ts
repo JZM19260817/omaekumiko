@@ -3,12 +3,15 @@ import fetch from 'cross-fetch';
 // axios.defaults.withCredentials=true;
 
 export async function get(url:any,param:any,cookie:any){
+    const credentials=localStorage.sessionInfo?JSON.parse(localStorage.sessionInfo).isLogin:false;
+    // console.log(credentials);
     return await axios({
         method:'get',
         url:`${url}/${param}`,
-        headers:{
-            'cookie':cookie,
-        }
+        // headers:{
+        //     'cookie':cookie,
+        // },
+        withCredentials:credentials
     }).then(res=>res.data)
         .catch(e=>console.error(e));
 }

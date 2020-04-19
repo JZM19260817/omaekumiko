@@ -48,7 +48,9 @@ router.get("/transfer/mp4",(req,res,next)=>{
     const url=req.query.video;
     fetch(url,{
         headers:{
-            Range:`bytes=${start}-${end}`
+            Range:`bytes=${start}-${end}`,
+            Origin:'https://www.bilibili.com',
+            Referer:'https://www.bilibili.com'
         }
     }).then(response=>{
         const headers=response.headers;

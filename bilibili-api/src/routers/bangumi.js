@@ -19,8 +19,9 @@ router.get("/bangumi/ep:ep",(req,res,next)=>{
     const cookies=req.cookies;
     let ret='';
     for(let it in cookies){
-        ret+=encodeURIComponent(it)+'='+encodeURIComponent(cookies[it])+';'
+        ret+=encodeURIComponent(it)+'='+cookies[it]+';'
     }
+    console.log(cookies);
     axios({
         url:URL_PLAYING_BANGUMI.replace("{ep}",ep),
         headers:{
@@ -35,9 +36,8 @@ router.get("/bangumi/ep:ep",(req,res,next)=>{
             canWatch:fetchBangumiCanWatch(data),
             currentP:fetchCurrentP(data),
             thisBangumi:fetchThisBangumi(data),
-            bangumiDetail:fetchBangumiDetail(data),
+            // bangumiDetail:fetchBangumiDetail(data),
         };
-        console.log(resData);
         res.send(resData);
     }).catch(next);
 });
@@ -48,7 +48,7 @@ router.get("/bangumi/media_md/md:mId",(req,res,next)=>{
     for(let it in cookies){
         ret+=encodeURIComponent(it)+'='+encodeURIComponent(cookies[it])+';'
     }
-    fetchAboutBangumi(req.params.uId,ret).then(data=>{
+    fetchAboutBangumi(req.params.mId,ret).then(data=>{
         const resData={
             code:"1",
             msg:"success",
@@ -64,7 +64,7 @@ router.get("/bangumi/section/sid:sid",(req,res,next)=>{
     for(let it in cookies){
         ret+=encodeURIComponent(it)+'='+encodeURIComponent(cookies[it])+';'
     }
-    fetchBangumiSection(req.params.sId,ret).then(data=>{
+    fetchBangumiSection(req.params.sid,ret).then(data=>{
         const resData={
             code:"1",
             msg:"success",

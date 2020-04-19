@@ -4,7 +4,7 @@ import * as User from "../../api/up-users";
 import ReactCookies from 'react-cookies';
 import {setShouldLogin} from "../actions";
 
-const defaultLogin = {
+export const defaultLogin = {
     userName: '',
     userAvater: '',
     userUID: '',
@@ -16,8 +16,17 @@ function setCookie(myUrl) {
     for (let i = 0; i < myUrl.length; i++) {
         console.log('cookie:',(myUrl[i].split(';')[0]).split("=")[0],"  ",(myUrl[i].split(';')[0]).split("=")[1],);
         ReactCookies.save((myUrl[i].split(';')[0]).split("=")[0],
-            (myUrl[i].split(';')[0]).split("=")[1]);
+            decodeURIComponent((myUrl[i].split(';')[0]).split("=")[1]));
     }
+    console.log(document.cookie);
+}
+
+function delCookies(){
+    ReactCookies.remove('DedeUserID__ckMd5');
+    ReactCookies.remove('DedeUserID');
+    ReactCookies.remove('SESSDATA');
+    ReactCookies.remove('bili_jct');
+    ReactCookies.remove('sid');
 }
 
 function getUID(myUrl) {
@@ -41,15 +50,17 @@ export async function tryLogin(oauthKey, dispatch) {
         };
         console.log(hasLogin);
         // return hasLogin;
+        localStorage.setItem('sessionInfo', JSON.stringify(hasLogin));
         dispatch(setShouldLogin(hasLogin))
     } else {
         timer=setTimeout(() => tryLogin(oauthKey, dispatch), 2000);
     }
 }
-export  const clearT=()=>{
+export const clearT=()=>{
     clearTimeout(timer)
 }
 export const logout = () => {
+    delCookies();
     return dispatch => {
         dispatch(setShouldLogin(defaultLogin));
     }

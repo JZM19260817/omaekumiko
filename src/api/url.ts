@@ -1,5 +1,6 @@
 // const prefix = process.env.URL_PREFIX;
-const prefix='http://127.0.0.1:2233';
+// const prefix='http://127.0.0.1:2233';
+const prefix='';
 //bangumi
 const URL_PLAYING_BANGUMI=prefix+"/bangumi";
 const URL_ABOUT_BANGUMI=prefix+"/bangumi/media_md";
@@ -33,6 +34,7 @@ const URL_INTERACT_VIDEO=prefix+"/public/interact";
 
 //ranking
 const URL_RANKING=prefix+"/ranking";
+const URL_RANKING_INDEX=prefix+"/ranking_index";
 
 //search
 const URL_SEARCH=prefix+"/search";
@@ -71,6 +73,7 @@ export{
     URL_VIDEO_TYPE,
     URL_INTERACT_VIDEO,
     URL_RANKING,
+    URL_RANKING_INDEX,
     URL_SEARCH,
     URL_HOTWD,
     URL_UPUSER_DATA,

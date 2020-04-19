@@ -1,17 +1,18 @@
 import React from 'react';
 import {Tabs} from 'antd';
-import { Switch, Route } from 'react-router-dom';
+import {TabsProps} from 'antd/es/tabs';
 
 interface DrawerProps {
-    currentIndex: number;
+    currentIndex: string;
     drawerItem: Array<{}>,
+    onChange: TabsProps['onChange']
 }
 
 class Drawer extends React.Component<DrawerProps> {
 
     getTab(data: any) {
         const {TabPane} = Tabs;
-        return (<Tabs>
+        return (<Tabs onChange={this.props.onChange} activeKey={this.props.currentIndex}>
             {data.map((item) => (
                 <TabPane tab={item.typename} key={item.tid}>
                 </TabPane>

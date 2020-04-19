@@ -1,8 +1,8 @@
 import {AnyAction, combineReducers} from "redux";
 import * as ActionTypes from './action-types';
 
-const initState = {
-    shouldLogin: {
+export const initState = {
+    shouldLogin: JSON.parse(localStorage.getItem('sessionInfo') || '{}') || {
         userName: '',
         userAvater: '',
         userUID: '',
@@ -25,6 +25,15 @@ function combineShouldLogin(shouldLogin = initState.shouldLogin, action: AnyActi
     switch (action.type) {
         case ActionTypes.SET_SHOULD_LOGIN:
             return action.shouldLogin;
+        case ActionTypes.SET_LOG_OUT:
+            localStorage.removeItem('sessionInfo')
+            return {
+                userName: '',
+                userAvater: '',
+                userUID: '',
+                userCookie: '',
+                isLogin: false,
+            };
         default:
             return shouldLogin;
     }

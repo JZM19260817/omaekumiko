@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type");
     res.header("Access-Control-Allow-Methods", "PUT,DELETE,POST,GET");
     res.header("Access-Control-Max-Age",3600*24*30);

@@ -2,8 +2,9 @@ import React from 'react';
 import * as SearchAPI from '../../api/search'
 import {Input} from 'antd';
 import {Card} from 'antd';
+import {Link, withRouter, RouteComponentProps} from "react-router-dom";
 
-interface searchProps {
+interface searchProps extends RouteComponentProps {
 }
 
 interface searchState {
@@ -36,9 +37,11 @@ class search extends React.Component<searchProps, searchState> {
         return (
             <Card title="热搜">
                 {data.map((item) => (
-                    <Card.Grid style={gridStyle}>
-                        {item.keyword}
-                    </Card.Grid>
+                    <Link to={`/search/${item.keyword}`}>
+                        <Card.Grid style={gridStyle}>
+                            {item.keyword}
+                        </Card.Grid>
+                    </Link>
                 ))}
             </Card>
         )
@@ -56,7 +59,9 @@ class search extends React.Component<searchProps, searchState> {
                     <Search
                         size={'large'}
                         placeholder="搜索"
-                        onSearch={value => console.log(value)}
+                        onSearch={value => {
+                            this.props.history.push(`/search/${value}`)
+                        }}
                         enterButton
                     />
                 </div>
@@ -68,4 +73,4 @@ class search extends React.Component<searchProps, searchState> {
     }
 }
 
-export default search;
+export default withRouter(search);

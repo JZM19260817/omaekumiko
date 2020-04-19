@@ -11,7 +11,7 @@ import ReactCookies from 'react-cookies';
 import Eupho from "../../dreamsolister/Eupho2.png";
 import {Link} from 'react-router-dom'
 import {setShouldLogin} from "../../redux/actions";
-const currentData = Store.getState();
+
 const mapStateToProps=(state)=>({
     shouldLogin:state.shouldLogin,
 });
@@ -76,21 +76,22 @@ class login extends React.Component<loginPageProps,loginPageState> {
 
     render() {
         console.log(this.props, 'login')
+        const currentData = this.props.shouldLogin;
         return (
             <div style={eupho} className="page">
                 <Header
-                    userName={currentData.shouldLogin.userName}
-                    userAvater={currentData.shouldLogin.userAvater}
-                    userUID={currentData.shouldLogin.userUID}
-                    userCookie={currentData.shouldLogin.userCookie}
-                    isLogin={currentData.shouldLogin.isLogin}
+                    userName={currentData.userName}
+                    userAvater={currentData.userAvater}
+                    userUID={currentData.userUID}
+                    userCookie={currentData.userCookie}
+                    isLogin={currentData.isLogin}
                 />
                 <div>
                     <QRCode
                         className="qrcode"
                         value={this.state.oauthKeyURL}  //value参数为生成二维码的链接
                         size={250} //二维码的宽高尺寸
-                        fgColor="#f45a8d"  //二维码的颜色
+                        fgColor="#000000"  //二维码的颜色
                     />
                     <a style={{'color':'#f45a8d','fontSize':'25px'}}>用bilibili扫码登录~</a>
                 </div>
