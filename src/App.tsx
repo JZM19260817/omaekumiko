@@ -76,7 +76,7 @@ class App extends React.Component<appProps, appState> {
                     <Route exact path="/login" component={LoginPage}/>
                     <Route exact path="/search" component={SearchPage}/>
                     <Route exact path="/video/:aId/:p" component={Video}/>
-                    <Route exact path="/video/ep:ep" component={Bangumi}/>
+                    <Route exact path="/bangumi/ep:ep" component={Bangumi}/>
                     <Route exact path="/up/:uId" component={UpUser}/>
                     <Route exact path="/search/:wd" component={Result}/>
                     <Route path="/" render={() => (

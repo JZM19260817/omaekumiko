@@ -11,7 +11,7 @@ import Store from "../../redux/store";
 // const currentData = Store.getState();
 
 interface bangumiProps {
-    shouldLogin:any,
+    shouldLogin: any,
 }
 
 interface bangumiState {
@@ -35,15 +35,17 @@ class Bangumi extends React.Component<bangumiProps, bangumiState> {
 
     renderBangumi(data: any) {
         const {Meta} = Card;
-        return data.map((item) =>
-            <Card
-                hoverable
-                style={{width: 240}}
-                cover={<img src={item.cover}/>}
-            >
-                <Meta title={item.title}/>
-            </Card>
-        )
+        return data.map((item) => (
+            <Link to={`/bangumi/ep${item.ep_id}`}>
+                <Card
+                    hoverable
+                    style={{width: 240}}
+                    cover={<img src={item.cover}/>}
+                >
+                    <Meta title={item.title}/>
+                </Card>
+            </Link>
+        ))
     }
 
     async componentDidMount() {
@@ -73,6 +75,6 @@ class Bangumi extends React.Component<bangumiProps, bangumiState> {
     }
 }
 
-export default connect(({ shouldLogin }) => ({
+export default connect(({shouldLogin}) => ({
     shouldLogin
 }), null)(Bangumi);
