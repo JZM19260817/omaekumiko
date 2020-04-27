@@ -11,6 +11,7 @@ import{
     fetchAboutBangumi,
     fetchBangumiSection
 }from '../api';
+import {writeFile} from "./writeFiles";
 const router=express.Router();
 router.use(cookieParser());
 
@@ -19,9 +20,9 @@ router.get("/bangumi/ep:ep",(req,res,next)=>{
     const cookies=req.cookies;
     let ret='';
     for(let it in cookies){
-        ret+=encodeURIComponent(it)+'='+cookies[it]+';'
+        ret+=encodeURIComponent(it)+'='+encodeURIComponent(cookies[it])+';'
     }
-    console.log(cookies);
+    console.log('ret:',ret);
     axios({
         url:URL_PLAYING_BANGUMI.replace("{ep}",ep),
         headers:{
@@ -39,7 +40,13 @@ router.get("/bangumi/ep:ep",(req,res,next)=>{
             // bangumiDetail:fetchBangumiDetail(data),
         };
         res.send(resData);
-    }).catch(next);
+        const bigData={
+            'user':cookies.DedeUserID,
+            'name':resData.thisBangumi.mediaInfo.title,
+        }
+        return bigData;
+    }).then(res=>writeFile(res,'bangumi'))
+        .catch(next);
 });
 
 router.get("/bangumi/media_md/md:mId",(req,res,next)=>{

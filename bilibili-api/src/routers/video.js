@@ -2,6 +2,7 @@ import express from 'express';
 import {
     fetchVideoData,
 }from "../api"
+import {writeFile} from "./writeFiles";
 const router=express.Router();
 
 router.get("/video/av:aId/p:p",(req,res,next)=>{
@@ -18,7 +19,14 @@ router.get("/video/av:aId/p:p",(req,res,next)=>{
         };
         // const initUrl=resData.data.reduxAsyncConnect.videoInfo.initUrl;
         res.send(resData);
-    }).catch(next);
+        console.log(data);
+        const bigData={
+            'user':cookies.DedeUserID,
+            'name':data.video.viewInfo.title,
+        };
+        return bigData;
+    }).then(res=>writeFile(res,'video'))
+        .catch(next);
 });
 
 module.exports = router;

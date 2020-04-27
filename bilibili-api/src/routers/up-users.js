@@ -1,4 +1,5 @@
 import express from "express";
+import {writeFile} from './writeFiles';
 import{
     fetchUserData,
     fetchTopVideoForFans,
@@ -22,7 +23,9 @@ router.get("/up/:uId",(req,res,next)=>{
             data
         };
         res.send(resData);
-    }).catch(next);
+        return data.data;
+    }).then(res=>writeFile(res,'upuser'))
+        .catch(next);
 });
 
 router.get("/up/myFollow/:uId",(req,res,next)=>{

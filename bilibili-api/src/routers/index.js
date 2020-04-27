@@ -9,6 +9,7 @@ import transferRouter from './transfer';
 import upUserRouter from './up-users';
 import videoRouter from './video';
 import publicRouter from './public';
+import queryBigData from './queryBigData';
 const router=express.Router();
 
 router.use(bangumiRouter);
@@ -21,5 +22,6 @@ router.use(transferRouter);
 router.use(upUserRouter);
 router.use(videoRouter);
 router.use(publicRouter);
+router.use(queryBigData);
 
 module.exports = router;

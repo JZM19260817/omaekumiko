@@ -50,6 +50,9 @@ const URL_ALL_VIDEOS=prefix+"/up/allVideos";
 //video
 const URL_VIDEO_DETAIL=prefix+"/video";
 
+//大数据展示
+const URL_BIGDATA=prefix+"/query"
+
 export{
     URL_PLAYING_BANGUMI,
     URL_ABOUT_BANGUMI,
@@ -81,5 +84,6 @@ export{
     URL_TOP_VIDEO_FANS,
     URL_TOP_VIDEO_OTHERS,
     URL_ALL_VIDEOS,
-    URL_VIDEO_DETAIL
+    URL_VIDEO_DETAIL,
+    URL_BIGDATA
 };

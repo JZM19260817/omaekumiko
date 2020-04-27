@@ -13,8 +13,9 @@ export const defaultLogin = {
 };
 
 function setCookie(myUrl) {
+    console.log('url:',myUrl)
     for (let i = 0; i < myUrl.length; i++) {
-        console.log('cookie:',(myUrl[i].split(';')[0]).split("=")[0],"  ",(myUrl[i].split(';')[0]).split("=")[1],);
+        console.log('cookie:',(myUrl[i].split(';')[0]).split("=")[0],"  ",decodeURIComponent((myUrl[i].split(';')[0]).split("=")[1]),);
         ReactCookies.save((myUrl[i].split(';')[0]).split("=")[0],
             decodeURIComponent((myUrl[i].split(';')[0]).split("=")[1]));
     }

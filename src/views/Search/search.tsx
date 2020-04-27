@@ -67,6 +67,7 @@ class search extends React.Component<searchProps, searchState> {
                 </div>
                 <div style={{width: '60%', margin: '0 auto'}}>
                     {this.renderHotWd(this.state.hotWd)}
+                    <Link to={"/bigData"}>看看我喜欢什么</Link>
                 </div>
             </div>
         )

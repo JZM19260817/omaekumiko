@@ -12,10 +12,7 @@ import UpUser from "./views/UpUser/UpUser";
 import Video from "./views/Video/Video";
 import Bangumi from './views/Video/Bangumi';
 import Result from "./views/Search/Result";
-
-import * as MainAPI from './api/main';
-import {Tabs} from "antd";
-import Drawer from "./components/drawer/Drawer";
+import bigData from "./views/BigData/bigData";
 
 const currentData = Store.getState();
 
@@ -79,6 +76,7 @@ class App extends React.Component<appProps, appState> {
                     <Route exact path="/bangumi/ep:ep" component={Bangumi}/>
                     <Route exact path="/up/:uId" component={UpUser}/>
                     <Route exact path="/search/:wd" component={Result}/>
+                    <Route exact path="/bigData" component={bigData}/>
                     <Route path="/" render={() => (
                         <Switch>
                             <Redirect from="/channel/0" to="/" />
